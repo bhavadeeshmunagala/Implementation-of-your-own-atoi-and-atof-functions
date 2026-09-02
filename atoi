@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int my_atoi(char *p) {
+    int num = 0;
+    char *s = p;
+
+    if (*p == '-')
+        p++;
+
+    while (*p) {
+        if (*p >= '0' && *p <= '9') {
+            num = num * 10 + (*p - 48);
+            p++;
+        } else {
+            break;
+        }
+    }
+
+    if (*s == '-')
+        num *= -1;
+
+    return num;
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a number: ");
+    scanf("%s", str);
+
+    printf("%d\n", my_atoi(str));
+
+    return 0;
+}
