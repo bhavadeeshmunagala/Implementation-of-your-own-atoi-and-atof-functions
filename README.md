@@ -1,1 +1,45 @@
-# Implementation-of-your-own-atoi-and-atof-functions
+#include <stdio.h>
+double my_atof(const char *str) {
+    double result = 0.0;
+    double fraction = 1.0;
+    int sign = 1;
+
+    // 1. Handle sign
+    if (*str == '-') {
+        sign = -1;
+        str++;
+    } else if (*str == '+') {
+        str++;
+    }
+
+    // 2. Parse numbers before the decimal point
+    while (*str >= '0' && *str <= '9') {
+        result = (result * 10.0) + (*str - '0');
+        str++;
+    }
+
+    // 3. Parse numbers after the decimal point
+    if (*str == '.') {
+        str++; // Skip the dot
+        
+        while (*str >= '0' && *str <= '9') {
+            fraction *= 10.0;
+            result += (*str - '0') / fraction;
+            str++;
+        }
+    }
+
+    return sign * result;
+}
+
+int main() {
+    char str[100];
+
+    printf("Enter a number: ");
+    scanf("%s", str);
+
+    double value = my_atof(str);
+    printf("Result: %lf\n", value);
+
+    return 0;
+}
